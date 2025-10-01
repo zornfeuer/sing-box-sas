@@ -48,7 +48,6 @@ services:
     image: docker.io/prom/prometheus:latest
     network: prometheus
     volumes:
-      - prometheusdata:/prometheus
       - ./prometheus.yaml:/etc/prometheus/prometheus.yml
     ports:
       - "9092:9090"
