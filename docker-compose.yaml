@@ -70,9 +70,3 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=admin
     volumes:
       - ./grafana/datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
-      - grafanadata:/var/lib/grafana
-
-  volumes:
-    prometheusdata:
-    grafanadata:
-
