@@ -1,0 +1,26 @@
+auth_enabled: false
+
+server:
+  http_listen_port: 3100
+
+ingester:
+  wal:
+    enabled: true
+    dir: /loki/wal
+
+  chunk_idle_period: 5m
+  chunk_block_size: 500
+  max_chunk_size: 1048576
+  max_cache_size: 10485760
+  max_entries_limit: 5000
+
+schema:
+  configs:
+    - from: 2020-10-10
+      store: boltdb-shipper
+      object_store: s3
+      schema: v11
+      index:
+        prefix: index_
+        period: 168h
+

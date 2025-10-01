@@ -1,0 +1,74 @@
+on: "3.8"
+services:
+  sing-box-shadowsocks:
+    image: ghcr.io/sagernet/sing-box
+    ports:
+      - "443:443"
+    container_name: sing-box-shadowsocks
+    restart: always
+    volumes:
+      - /etc/sing-box/shadowsocks.json:/etc/sing-box/config.json
+      - /var/log/shadowsocks/:/var/log/
+    command: -D /var/lib/sing-box -C /etc/sing-box/ run
+
+  sing-box-hysteria:
+    image: ghcr.io/sagernet/sing-box
+    ports:
+      - "9090:443"
+      - "9090:443/udp"
+    container_name: sing-box-hysteria
+    restart: always
+    volumes:
+      - /etc/sing-box/hysteria.json:/etc/sing-box/config.json
+      - /etc/sing-box/certs/:/root/.local/share/certmagic/
+      - /var/log/hysteria/:/var/log/
+    command: -D /var/lib/sing-box -C /etc/sing-box/ run
+
+  promtail:
+    image: grafana/promtail:latest
+    container_name: promtail
+    ports:
+      - "9080:9080"
+    volumes:
+      - /var/log/:/var/log/
+      - ./promtail-config.yaml:/etc/promtail/config.yaml
+    command: -config.file=/etc/promtail/config.yaml
+    privileged: true
+
+  loki:
+    image: grafana/loki:latest
+    container_name: loki
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./loki-config.yaml:/etc/loki/local-config.yaml
+
+  prometheus:
+    name: prometheus
+    image: docker.io/prom/prometheus:latest
+    network: prometheus
+    volumes:
+      - prometheus_data:/prometheus
+      - ./prometheus.yaml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9092:9090"
+
+  podman-exporter:
+    name: podman-exporter
+    image: quay.io/navidys/prometheus-podman-exporter:latest
+    run_flags:
+      userns: keep-id
+    ports:
+      - "9882:9882"
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - ./grafana/datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
+      - grafanadata:/var/lib/grafana
