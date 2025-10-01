@@ -55,6 +55,10 @@ services:
   podman-exporter:
     name: podman-exporter
     image: quay.io/navidys/prometheus-podman-exporter:latest
+    environment:
+      CONTAINER_HOST: unix:///run/podman/podman.sock
+    volumes:
+      - /run/podman/podman.sock:/run/podman/podman.sock
     run_flags:
       userns: keep-id
     ports:
