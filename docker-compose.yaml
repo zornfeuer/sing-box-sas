@@ -72,3 +72,8 @@ services:
     volumes:
       - ./grafana/datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
       - grafanadata:/var/lib/grafana
+
+  volumes:
+    prometheusdata:
+    grafanadata:
+
