@@ -60,7 +60,7 @@ services:
     volumes:
       - /run/podman/podman.sock:/run/podman/podman.sock
     run_flags:
-      userns: keep-id
+      u: root
     ports:
       - "9882:9882"
 
