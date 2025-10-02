@@ -8,10 +8,18 @@ clients:
   - url: http://loki:3100/loki/api/v1/push
 
 scrape_configs:
-- job_name: podman-logs
+- job_name: shadowsocks-logs
   static_configs:
   - targets:
       - localhost
     labels:
-      job: podman-logs
-      __path__: /var/log/*/*.log
+      job: shadowsocks-logs
+      __path__: /var/log/shadowsocks/box.log
+
+- job_name: hysteria-logs
+  static_configs:
+  - targets:
+      - localhost
+    labels:
+      job: hysteria-logs
+      __path__: /var/log/hysteria/box.log
