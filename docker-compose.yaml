@@ -35,6 +35,7 @@ services:
       - /etc/letsencrypt/:/etc/letsencrypt/
     depends_on:
       - sing-box-hysteria
+      - grafana
 
   promtail:
     image: grafana/promtail:latest
