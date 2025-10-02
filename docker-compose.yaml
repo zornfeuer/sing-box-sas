@@ -3,7 +3,7 @@ services:
   sing-box-shadowsocks:
     image: ghcr.io/sagernet/sing-box:v1.11.4
     ports:
-      - "443:443"
+      - "9090:443"
     container_name: sing-box-shadowsocks
     restart: always
     volumes:
@@ -17,8 +17,8 @@ services:
       default:
         ipv4_address: 10.89.2.3
     ports:
-      - "9090:443"
-      - "9090:443/udp"
+      - "443:443"
+      - "443:443/udp"
     container_name: sing-box-hysteria
     restart: always
     volumes:
