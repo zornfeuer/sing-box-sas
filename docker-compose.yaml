@@ -78,6 +78,6 @@ services:
     volumes:
       - ./grafana/datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
 
-  networks:
-    default:
-      driver: bridge
+networks:
+  default:
+    driver: bridge
