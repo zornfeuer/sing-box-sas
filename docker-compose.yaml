@@ -13,6 +13,9 @@ services:
 
   sing-box-hysteria:
     image: ghcr.io/sagernet/sing-box:v1.11.4
+    networks:
+      default:
+        ipv4_address: 10.89.2.3
     ports:
       - "9090:443"
       - "9090:443/udp"
@@ -74,3 +77,7 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=admin
     volumes:
       - ./grafana/datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
+
+  networks:
+    default:
+      driver: bridge
