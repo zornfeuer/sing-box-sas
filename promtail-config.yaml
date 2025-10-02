@@ -15,7 +15,6 @@ scrape_configs:
     labels:
       job: shadowsocks-logs
       __path__: /var/log/shadowsocks/box.log
-
 - job_name: hysteria-logs
   static_configs:
   - targets:
