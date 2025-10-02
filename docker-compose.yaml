@@ -21,8 +21,7 @@ services:
     volumes:
       - /etc/sing-box/hysteria.json:/etc/sing-box/config.json
       - /var/log/hysteria/:/var/log/
-      - /etc/letsencrypt/live/pacmansshtls.chickenkiller.com/fullchain.pem:/root/.local/share/certmagic/certificates/acme-v02.api.letsencrypt.org-directory/canbeitallass.chickenkiller.com/canbeitallass.chickenkiller.com.crt
-      - /etc/letsencrypt/live/pacmansshtls.chickenkiller.com/privkey.pem:/root/.local/share/certmagic/certificates/acme-v02.api.letsencrypt.org-directory/canbeitallass.chickenkiller.com/canbeitallass.chickenkiller.com.key
+      - /etc/letsencrypt:/etc/letsencrypt
 
     command: -D /var/lib/sing-box -C /etc/sing-box/ run
 
