@@ -1,7 +1,7 @@
 on: "3.8"
 services:
   sing-box-shadowsocks:
-    image: ghcr.io/sagernet/sing-box:v.12.0
+    image: ghcr.io/sagernet/sing-box:v1.12.0
     ports:
       - "443:443"
     container_name: sing-box-shadowsocks
