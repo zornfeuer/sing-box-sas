@@ -5,4 +5,4 @@ scrape_configs:
   - job_name: "podman-exporter"
     metrics_path: "/metrics"
     static_configs:
-      - targets: ["podman-exporter:9882"]
+      - targets: ["localhost:9882"]
