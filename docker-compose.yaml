@@ -29,10 +29,12 @@ services:
     image: nginx:latest
     ports:
       - "80:80"
+      - "80:80/udp"
       - "8443:443"
     container_name: nginx
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./sites-enabled/grafana.conf:/etc/nginx/conf.d/grafana.conf
       - /etc/letsencrypt/:/etc/letsencrypt/
     depends_on:
       - sing-box-hysteria
