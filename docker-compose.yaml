@@ -90,3 +90,5 @@ services:
     volumes:
       - ./grafana/datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
       - ./grafanadata:/var/lib/grafana
+      - /etc/letsencrypt/live/pacmansshtls.chickenkiller.com/privkey.pem:/etc/grafana/grafana.key
+      - /etc/letsencrypt/live/pacmansshtls.chickenkiller.com/fullchain.pem:/etc/grafana/grafana.crt
