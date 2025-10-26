@@ -11,17 +11,6 @@ services:
       - /var/log/shadowsocks/:/var/log/
     command: -D /var/lib/sing-box -C /etc/sing-box/ run
 
-  sing-box-shadowsocks-ru:
-    image: ghcr.io/sagernet/sing-box:v1.11.4
-    ports:
-      - "6443:443"
-    container_name: sing-box-shadowsocks-ru
-    restart: always
-    volumes:
-      - /etc/sing-box/shadowsocks_ru.json:/etc/sing-box/config.json
-      - /var/log/shadowsocks/:/var/log/
-    command: -D /var/lib/sing-box -C /etc/sing-box/ run
-
   promtail:
     image: grafana/promtail:latest
     container_name: promtail
