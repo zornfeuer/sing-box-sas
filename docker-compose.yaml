@@ -11,34 +11,16 @@ services:
       - /var/log/shadowsocks/:/var/log/
     command: -D /var/lib/sing-box -C /etc/sing-box/ run
 
-  sing-box-hysteria:
+  sing-box-shadowsocks-ru:
     image: ghcr.io/sagernet/sing-box:v1.11.4
     ports:
-      - "9090:443"
-      - "9090:443/udp"
-    container_name: sing-box-hysteria
+      - "6443:443"
+    container_name: sing-box-shadowsocks-ru
     restart: always
     volumes:
-      - /etc/sing-box/hysteria.json:/etc/sing-box/config.json
-      - /var/log/hysteria/:/var/log/
-      - /etc/letsencrypt:/etc/letsencrypt
-
+      - /etc/sing-box/shadowsocks_ru.json:/etc/sing-box/config.json
+      - /var/log/shadowsocks/:/var/log/
     command: -D /var/lib/sing-box -C /etc/sing-box/ run
-
-  nginx:
-    image: nginx:latest
-    ports:
-      - "80:80"
-      - "80:80/udp"
-      - "8443:443"
-    container_name: nginx
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./sites-enabled/grafana.conf:/etc/nginx/conf.d/grafana.conf
-      - /etc/letsencrypt/:/etc/letsencrypt/
-    depends_on:
-      - sing-box-hysteria
-      - grafana
 
   promtail:
     image: grafana/promtail:latest
